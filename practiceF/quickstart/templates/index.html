@@ -1,0 +1,14 @@
+
+{% extends 'base.html'%}
+{% block content%}
+    {% load static %}
+    <span>Добро пожаловать {{ user }}</span>
+    {% for i in data.all_user_image %}
+        <span>{{ i.title }}</span>
+        <p>{{ i.username }}</p>
+        <p>{{ i.date }}</p>
+        <img class="image" style="height: 200px;width: 200px;" src="{{ i.image_downloaded.url }}">
+        {% endfor %}
+        <span>{{ predictedLabelresult }}</span>
+        <a href='user_image/'><button>Загрузить фото</button></a>
+{% endblock%}

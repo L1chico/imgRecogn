@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% block content%}
+    {% load static %}
+    {% if user.is_authenticated %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <span>Для успешной работы название файла изображения должно быть на латинице</span>
+            <button type="submit">Загрузка</button>
+        </form>
+    {% else %}
+        <span><a href="{% url 'login' %}">Для зарузки фото, пожалуйста войдите в систему</a></span>
+    {% endif %}
+    {% for b in all_user_image %}
+    <p>{{ b.title }}</p>
+    <p>{{ b.username }}</p>
+    <p>{{ b.date }}</p>
+    <img src="{{ b.image_downloaded.url }}" width="100px">
+    <!-- <p>Оригинальный размер картинки  {{ b.image_downloaded.width }}x{{ b.image_downloaded.height }}</p> -->
+    <br/>
+    {% endfor %}
+{% endblock%}
